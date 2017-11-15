@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.AfterClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -547,7 +548,7 @@ public class PredefinedStepDefinitions implements BaseTest {
 		}
 	}
 	
-	@After
+	@AfterClass
 	public final void tearDown() {
 		DriverUtil.closeDriver();
 	}
