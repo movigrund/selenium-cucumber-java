@@ -1,7 +1,11 @@
 package info.seleniumcucumber.methods;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -315,5 +319,19 @@ public class AssertionMethods extends SelectElementByType implements BaseTest
 			throw new TestCaseFailed("Option Not Selected From Dropwdown");
 		else if ((actualValue.equals(option))&&(!shouldBeSelected))
 			throw new TestCaseFailed("Option Selected From Dropwdown");
+	}
+
+	public void checkCount(int number, String xpathQuery) throws TestCaseFailed {
+		try {
+			wait.until(ExpectedConditions.numberOfElementsToBe(getelementbytype("xpath", xpathQuery), number));
+		}
+		catch(TimeoutException e){
+			// Do nothing. Check unconditionally found elements.
+		}
+		finally {
+			final int foundNum = driver.findElements(By.xpath(xpathQuery)).stream().filter(e -> e.isDisplayed()).collect(Collectors.toList()).size();
+			if (foundNum != number)
+				throw new TestCaseFailed("Number of found web elements is not equal! expected: " + number + " found: " + foundNum);
+		}
 	}
 }

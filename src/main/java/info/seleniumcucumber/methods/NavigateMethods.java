@@ -113,7 +113,14 @@ public class NavigateMethods extends SelectElementByType implements BaseTest
 		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
 		action.moveToElement(element).perform();
 	}
-	
+
+	public void hoverOverElementWithOffset(String accessType, String accessName, int offsetX, int offsetY)
+	{
+		Actions action = new Actions(driver);
+		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
+		action.moveToElement(element, offsetX, offsetY).perform();
+	}
+
 	/** Method to scroll page to particular element
 	 * @param accessType : String : Locator type (id, name, class, xpath, css)
 	 * @param accessName : String : Locator value

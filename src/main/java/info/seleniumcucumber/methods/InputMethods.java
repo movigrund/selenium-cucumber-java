@@ -1,6 +1,8 @@
 package info.seleniumcucumber.methods;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,10 +11,10 @@ import org.openqa.selenium.support.ui.Select;
 
 public class InputMethods extends SelectElementByType implements BaseTest
 {
-	//SelectElementByType eleType= new SelectElementByType();
 	private WebElement dropdown =null;
 	private Select selectList=null;
-	
+	private Map<String, String> inputText = new HashMap<>();
+
 	/** Method to enter text into text field
 	 * @param accessType : String : Locator type (id, name, class, xpath, css)
 	 * @param text : String : Text value to enter in field
@@ -22,6 +24,7 @@ public class InputMethods extends SelectElementByType implements BaseTest
 	{
 		wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessName)));
 		driver.findElement(getelementbytype(accessType, accessName)).sendKeys(text);
+		inputText.put(accessName, text);
 	}
 	
 	/** Method to clear text of text field
@@ -70,16 +73,7 @@ public class InputMethods extends SelectElementByType implements BaseTest
 		else if (optionBy.equals("text"))
 			selectList.selectByVisibleText(option);
 	}
-	
-	//method to select all option from dropdwon list
-//	public void select_all_option_from_multiselect_dropdown(String access_type, String access_name)
-//	{
-//		dropdown = driver.findElement(getelementbytype(access_type, access_name));
-//		selectList = new Select(dropdown);
-//		
-//		//Select all method not present in JAVA
-//	}
-	
+
 	/** Method to unselect all option from dropdwon list
 	@param accessType : String : Locator type (id, name, class, xpath, css)
 	@param accessName : String : Locator value

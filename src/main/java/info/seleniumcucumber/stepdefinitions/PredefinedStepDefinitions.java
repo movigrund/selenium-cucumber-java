@@ -2,7 +2,9 @@ package info.seleniumcucumber.stepdefinitions;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
+import cucumber.api.java.en.Given;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.openqa.selenium.OutputType;
@@ -16,9 +18,13 @@ import cucumber.runtime.ScenarioImpl;
 import env.DriverUtil;
 import info.seleniumcucumber.methods.BaseTest;
 import info.seleniumcucumber.methods.TestCaseFailed;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class PredefinedStepDefinitions implements BaseTest {
 	protected WebDriver driver = DriverUtil.getDefaultDriver();
+	protected Random random = new Random();
 	//Navigation Steps
 	
 	//Step to navigate to specified URL
@@ -179,7 +185,16 @@ public class PredefinedStepDefinitions implements BaseTest {
 		miscmethodObj.validateLocator(type);
 		navigationObj.hoverOverElement(type, accessName);
 	}
-	
+
+//	@Then("^I hover over element having (.+) \"(.*?)\" with offset x (\\d+) and y (\\d+)$")
+//	public void hover_over_element(String type, String accessName, String offsetX, String offsetY) throws Exception
+//	{
+//		miscmethodObj.validateLocator(type);
+//		final int offsetXNum = Integer.parseInt(offsetX);
+//		final int offsetYNum = Integer.parseInt(offsetY);
+//		navigationObj.hoverOverElementWithOffset(type, accessName, offsetXNum, offsetYNum);
+//	}
+
 	//Assertion steps
 	
 	/** page title checking
@@ -302,7 +317,13 @@ public class PredefinedStepDefinitions implements BaseTest {
 		boolean flag = state.equals("selected");
 		assertionObj.isOptionFromDropdownSelected(type,by,option,accessName,flag);
 	}
-	
+
+	@Then("I should see (\\d+) elements having xpath \"(.*?)\"")
+	public void checkCount(String number, String xpathQuery) throws TestCaseFailed {
+		final int numberInt = Integer.parseInt(number);
+		assertionObj.checkCount(numberInt, xpathQuery);
+	}
+
 	//Input steps
 	
 	// enter text into input field steps
@@ -312,7 +333,16 @@ public class PredefinedStepDefinitions implements BaseTest {
 		miscmethodObj.validateLocator(type);
 		inputObj.enterText(type, text, accessName);
 	}
-	
+
+	@Then("^I enter randomized \"([^\"]*)\" into input field having (.+) \"([^\"]*)\"$")
+	public void enter_rand_text(String text, String type,String accessName) throws Exception
+	{
+		miscmethodObj.validateLocator(type);
+		final long random_part = random.nextLong();
+		final String enterText = text + random_part;
+		inputObj.enterText(type, enterText, accessName);
+	}
+
 	// clear input field steps
 	@Then("^I clear input field having (.+) \"([^\"]*)\"$")
 	public void clear_text(String type, String accessName) throws Exception
@@ -469,7 +499,33 @@ public class PredefinedStepDefinitions implements BaseTest {
 	{
 		clickObj.click("partialLinkText", accessName);
 	}
-	
+
+	@Then("^I submit the form$")
+	public void submitForm() {
+		clickObj.submit("xpath", "//form");
+	}
+
+	// Mouse maneuvers
+	@Then("^I drag the element having (.+) \"(.*?)\" and drop it over the element having (.+) \"(.*?)\"$")
+	public void dragAndDrop(String accessTypeSource, String accessValueSource, String accessTypeTarget, String accessValueTarget){
+		mouseManeuverObj.dragAndDrop(accessTypeSource, accessValueSource, accessTypeTarget, accessValueTarget);
+	}
+
+	@Then("^I drag the element having (.+) \"(.*?)\" and drop it over the element having (.+) \"(.*?)\" with offset x (\\d+) and y (\\d+)$")
+	public void dragAndDropWithOffset(String accessTypeSource, String accessValueSource, String accessTypeTarget, String accessValueTarget, String offsetX, String offsetY){
+		mouseManeuverObj.dragAndDropWithOffset(accessTypeSource, accessValueSource, accessTypeTarget, accessValueTarget, Integer.parseInt(offsetX), Integer.parseInt(offsetY));
+	}
+
+	@Then("^I start dragging at element \"(.*?)\"$")
+	public void startDragging(String accessTypeSource, String accessValueSource) {
+		mouseManeuverObj.startDragging(accessTypeSource, accessValueSource);
+	}
+
+	@Then("^I finish dragging by dropping at element \"(.*?)\"$")
+	public void finishDragging(String accessTypeTarget, String accessValueTarget) {
+		mouseManeuverObj.finishDragging(accessTypeTarget, accessValueTarget);
+	}
+
 	//Progress methods
 	
 	// wait for specific period of time
@@ -494,7 +550,7 @@ public class PredefinedStepDefinitions implements BaseTest {
 		miscmethodObj.validateLocator(type);
 		progressObj.waitForElementToClick(type, accessName, duration);
 	}
-	
+
 	//JavaScript handling steps
 	
 	//Step to handle java script
@@ -518,7 +574,7 @@ public class PredefinedStepDefinitions implements BaseTest {
 	{
 		screenshotObj.takeScreenShot();
 	}
-	
+
 	//Configuration steps
 	
 	// step to print configuration
@@ -547,7 +603,12 @@ public class PredefinedStepDefinitions implements BaseTest {
 			}
 		}
 	}
-	
+
+	@Given("Reset browser")
+	public void resetBrowser(){
+		configObj.resetBrowser();
+	}
+
 	@AfterClass
 	public final void tearDown() {
 		DriverUtil.closeDriver();

@@ -43,4 +43,10 @@ public class ClickElementsMethods extends SelectElementByType implements BaseTes
 		Actions action = new Actions(driver);
 		action.moveToElement(element).doubleClick().perform();
 	}
+
+	public void submit(String accessType, String accessValue)
+	{
+		element = wait.until(ExpectedConditions.presenceOfElementLocated(getelementbytype(accessType, accessValue)));
+		element.submit();
+	}
 }

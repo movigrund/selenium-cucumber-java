@@ -29,4 +29,8 @@ public class ConfigurationMethods implements BaseTest
 		System.out.println("Browser : "+cap.getBrowserName());
 		System.out.println("Platform : "+cap.getPlatform());
 	}
+
+	public void resetBrowser(){
+		driver.manage().deleteAllCookies();
+	}
 }
