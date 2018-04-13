@@ -5,7 +5,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class ProgressMethods extends SelectElementByType implements BaseTest
+public class ProgressMethods extends SelectElementByType
 {
 	/** Method to wait 
 	 * @param time : String : Time to wait

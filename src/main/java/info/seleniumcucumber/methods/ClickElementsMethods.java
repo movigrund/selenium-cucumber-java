@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-public class ClickElementsMethods extends SelectElementByType implements BaseTest
+public class ClickElementsMethods extends SelectElementByType
 {
 	//SelectElementByType eleType= new SelectElementByType();
 	private WebElement element=null;

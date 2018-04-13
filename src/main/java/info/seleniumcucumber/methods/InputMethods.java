@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 
-public class InputMethods extends SelectElementByType implements BaseTest
+public class InputMethods extends SelectElementByType
 {
 	private WebElement dropdown =null;
 	private Select selectList=null;

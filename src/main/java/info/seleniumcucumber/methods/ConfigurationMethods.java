@@ -10,7 +10,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import env.DriverUtil;
 import org.openqa.selenium.WebDriver;
 
-public class ConfigurationMethods implements BaseTest
+public class ConfigurationMethods
 {	  
 	protected WebDriver driver;
 	public ConfigurationMethods() {

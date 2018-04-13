@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
-public class AssertionMethods extends SelectElementByType implements BaseTest
+public class AssertionMethods extends SelectElementByType
 {
 	//This file contains assertion methods which are called from predefinedStepDefinitions
 
@@ -240,7 +240,7 @@ public class AssertionMethods extends SelectElementByType implements BaseTest
 	/** method to assert radio button selected/unselected
 	@param accessType : String : Locator type (id, name, class, xpath, css)
 	@param accessName : String : Locator value
-	@param shouldBeChecked : Boolean : test case [true or false]
+	@param shouldBeSelected : Boolean : test case [true or false]
 	*/
 	public void isRadioButtonSelected(String accessType,String accessName,boolean shouldBeSelected) throws TestCaseFailed
 	{

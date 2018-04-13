@@ -4,7 +4,7 @@
 
 	<groupId>selenium-cucumber</groupId>
 	<artifactId>selenium-cucumber-java</artifactId>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<packaging>jar</packaging>
 	<name>selenium-cucumber-java</name>
 
@@ -68,8 +68,13 @@
 			<artifactId>guava</artifactId>
 			<version>21.0</version>
 		</dependency>
-	</dependencies>
 
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>24.1-jre</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -82,17 +87,6 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<compilerArgument>-Werror</compilerArgument>
-
-					<systemPropertyVariables>
-						<property>
-							<name>browser</name>
-							<value>${browser}</value>
-						</property>
-						<property>
-							<name>cloud_config</name>
-							<value>${cloud_config}</value>
-						</property>
-					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>

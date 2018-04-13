@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MouseManeuver extends SelectElementByType implements BaseTest{
+public class MouseManeuver extends SelectElementByType {
 
 
 	public void dragAndDrop(String accessTypeSource, String accessValueSource, String accessTypeTarget, String accessValueTarget)
